@@ -24,8 +24,13 @@ const cli = meow(`
 console.log(cli);
 var history = require('./history')();
 var directory = require('./directory')(cli);
+var workedDir = [];
 if (cli.flags.add) {
     var fullPath = directory.createDirectory(fullPath);
     history.createOrUpdateHistory(fullPath);
+    workedDir.push(fullPath);
+} 
+if (cli.flags.exec){
+    require('./exec')(workedDir, cli.flags.exec.replace('{}', fullPath));
 }
 console.log(fullPath);

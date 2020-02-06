@@ -14,5 +14,6 @@
             "program": "${workspaceFolder}/index.js",
             "args":["--add"]
         }
+
     ]
 }
