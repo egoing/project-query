@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 'use strict';
 const meow = require('meow');
 const cli = meow(`
@@ -21,13 +22,10 @@ const cli = meow(`
     }
 });
 console.log(cli);
-
+var history = require('./history')();
 var directory = require('./directory')(cli);
-var path = require('path');
-if(cli.flags.add){
-    var basePath = directory.getBasePath();
-    var dirname = directory.getDirName();
-    var fullPath = path.join(basePath,dirname);
-    directory.createDirectory(fullPath);
+if (cli.flags.add) {
+    var fullPath = directory.createDirectory(fullPath);
+    history.createOrUpdateHistory(fullPath);
 }
 console.log(fullPath);

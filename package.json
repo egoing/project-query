@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "conf": "^6.2.0",
     "meow": "^6.0.0"
   }
 }

@@ -17,8 +17,8 @@ module.exports = function (cli) {
             }
             return dirname;
         },
-        getBasePath: function(){
-            if(cli.input.length>0){
+        getBasePath: function () {
+            if (cli.input.length > 0) {
                 var basePath = cli.input[0];
             } else {
                 var basePath = this.getTempPath();
@@ -35,11 +35,16 @@ module.exports = function (cli) {
             return global[tempDirectorySymbol];
         },
         createDirectory: function (newDirName) {
+            var path = require('path');
+            var basePath = this.getBasePath();
+            var dirname = this.getDirName();
+            var newDirName = path.join(basePath, dirname);
             if (!fs.existsSync(newDirName)) {
                 fs.mkdirSync(newDirName);
             } else {
-                throw new Error('Directory already exists.');
+                // throw new Error('Directory already exists.');
             }
+            return newDirName;
         }
     }
 }
