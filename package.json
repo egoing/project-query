@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cli-table3": "^0.5.1",
     "conf": "^6.2.0",
     "meow": "^6.0.0"
   }
