@@ -32,7 +32,7 @@ var directory = require('./directory')(cli);
 var selector = require('./selector');
 var workedDir = [];
 if (cli.flags.add) {
-    fullPath = directory.createDirectory();
+    var fullPath = directory.createDirectory();
     history.createOrUpdate(fullPath);
     workedDir.push(fullPath);
     console.log('created directory ' + fullPath);
@@ -50,16 +50,21 @@ if (cli.flags.add) {
 }
 if (cli.flags.exec) {
     var exec = require('./exec');
+    var workedDir = history.convertHistoryObj(workedDir);
     var plan = exec.plan(workedDir, cli.flags.exec);
     const readline = require("readline");
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
-    console.log('')
+    console.log("")
     for (var i = 0; i < plan.length; i++) {
-        console.log(plan[i].replace(';', '\n').replace('&&', '\n'));
-        console.log('');
+        var group = '\x1b[32m' + plan[i].path + '\x1b[0m'
+        console.group(group);
+        console.log(`cd ${plan[i].path}`);
+        console.log(plan[i].cmd.replace(';', '\n').replace('&&', '\n'));
+        console.groupEnd(group);
+        console.log('')
     }
     rl.question("Do you want to run these command? \x1b[33m\x1b[1m[y|N]\x1b[0m", function (answer) {
         if (['Y', 'y', 'yes'].indexOf(answer) === -1) {

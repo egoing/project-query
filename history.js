@@ -28,9 +28,13 @@ module.exports = function () {
             }
             if(selector.type === 'directory'){
                 var realPath = path.resolve(selector.value);
-                list = list.filter((e)=>e.path.indexOf(realPath)>-1 ? true : false);
+                list = list.filter((e)=>(e.path.indexOf(realPath)>-1 ? true : false));
             }
             return list;
+        },
+        convertHistoryObj:function(data){
+            var list = config.get('list');
+            return data.map((e)=>list.filter((f)=>f.path === e ? true : false)[0]);
         },
         print:function(list){
             var Table = require('cli-table3');
