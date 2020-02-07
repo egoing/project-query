@@ -47,6 +47,10 @@ module.exports = function () {
                 table.push([_num, _id, _path, _class]);
             }
             console.log(table.toString());
+        },
+        printWEB:function(list){
+            var web = require('./web');
+            web.list(list);
         }
     }
 }

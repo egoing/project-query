@@ -5,11 +5,14 @@ const meow = require('meow');
 const cli = meow(`
     Usage
       $ projectQuery [selector] [--exec command]
-      $ projectQuery [selector] mode [project name] [--exec command]
+      $ projectQuery [selector] option [project name] [--exec command]
       $ 
  
     Options
-      --rainbow, -r  Include a rainbow
+      --add, -a  create or registe project
+      --list, -l    show project list
+      --exec,
+      --GUI
  
     Examples
       $ foo unicorns --rainbow
@@ -20,11 +23,10 @@ const cli = meow(`
             alias: 'a'
         },
         list: {
-            alias: 'ls'
+            alias: 'l'
         }
     }
 });
-console.log(cli.flags, cli.input);
 var history = require('./history')();
 var directory = require('./directory')(cli);
 var selector = require('./selector');
@@ -34,8 +36,12 @@ if (cli.flags.add) {
     fullPath = directory.createDirectory(fullPath);
     history.createOrUpdate(fullPath);
     workedDir.push(fullPath);
+    console.log('created directory '+fullPath);
+} else if (cli.flags.gui) {
+    var selected_selector = selector.get(cli.input);
+    var list = history.getList(selected_selector);
+    history.printWEB(list);
 } else {
-    // {type:'directory, class, id', value:''}
     var selected_selector = selector.get(cli.input);
     var list = history.getList(selected_selector);
     workedDir = list.map(function(e){
