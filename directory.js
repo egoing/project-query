@@ -34,7 +34,7 @@ module.exports = function (cli) {
             }
             return global[tempDirectorySymbol];
         },
-        createDirectory: function (newDirName) {
+        createDirectory: function () {
             var path = require('path');
             var basePath = this.getBasePath();
             var dirname = this.getDirName();

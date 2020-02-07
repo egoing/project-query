@@ -1,6 +1,6 @@
 {
-  "name": "projectquery",
-  "version": "1.0.0",
+  "name": "project-query",
+  "version": "0.9.0",
   "description": "",
   "main": "cli.js",
   "scripts": {
@@ -8,6 +8,11 @@
   },
   "author": "",
   "license": "ISC",
+  "bin": {
+    "projectquery": "cli.js",
+    "project-query": "cli.js",
+    "pq": "cli.js"
+  },
   "dependencies": {
     "cli-table3": "^0.5.1",
     "conf": "^6.2.0",

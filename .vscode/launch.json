@@ -13,6 +13,16 @@
             ],
             "program": "${workspaceFolder}/cli.js",
             "args":["--add"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "exec",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/cli.js",
+            "args":["--exec","mkdir a/a;echo 'hi'"]
         }
 
     ]
